@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <h1>TodoApp with Typescript</h1>
+
+        <form class="formulario">
+          <input type="text" id="tarea">
+          <button class="boton">Agrega tu tarea</button>
+        </form>
+
+        <ul class="listado_tareas"></ul>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
