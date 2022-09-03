@@ -4,7 +4,6 @@ const form = document.querySelector<HTMLFormElement>('.formulario')
 const input = document.getElementById('tarea') as HTMLInputElement
 const list = document.querySelector<HTMLUListElement>('.listado_tareas')
 
-
 form?.addEventListener("submit", HandleForm)
 
 function HandleForm (e: Event)  {
@@ -19,13 +18,15 @@ function HandleForm (e: Event)  {
   }
 
   Listwork(myTask)
+  globalTask.push(myTask) 
+  saveStorage() //guarda en el localstorage el [{}]
 
   input.value = ""
 } 
 
 
 function Listwork(task: Task) {
-  let { title, date } = task;
+  let { title, date, done } = task;
 
   //li principal
   const li = document.createElement("LI")
@@ -43,11 +44,26 @@ function Listwork(task: Task) {
   //done
   const check = document.createElement("input")
   check.type = "checkbox"
+  check.checked = done;
   check.addEventListener('change', () => {
     task.done = check.checked
-    console.log(task)
+    saveStorage()
   })
   li.append(check)
 
   list?.append(li)
+}
+
+//ARREGLO
+const globalTask: Task[] = getStorage() //[] [a, b, c]
+globalTask.forEach(x => Listwork(x))
+
+//save
+function saveStorage() {
+  localStorage.setItem('TASK', JSON.stringify(globalTask))
+}
+//get
+function getStorage(): Task[] {
+  const task = localStorage.getItem('TASK')
+  return task == null ? [] : JSON.parse(task)
 }
