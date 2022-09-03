@@ -7,13 +7,15 @@ const list = document.querySelector<HTMLUListElement>('.listado_tareas')
 
 form?.addEventListener("submit", HandleForm)
 
-function HandleForm (e: any)  {
+function HandleForm (e: Event)  {
   e.preventDefault()
   if(input.value == "" || input.value == null) return
 
+  //creamos un objeto con mi input y creamos una fecha
   const myTask = {
     "title": input.value,
     "date": new Date(),
+    "done": false
   }
 
   Listwork(myTask)
@@ -23,18 +25,28 @@ function HandleForm (e: any)  {
 
 
 function Listwork(task: Task) {
-  const { title, date } = task;
+  let { title, date } = task;
 
+  //li principal
   const li = document.createElement("LI")
-  li.textContent = title
 
+  //work
+  const work = document.createElement('P')
+  work.textContent = title
+  li.append(work)
+
+  //date
   const wdata = document.createElement('P')
   wdata.textContent = date.toString()
   li.append(wdata)
 
+  //done
   const check = document.createElement("input")
   check.type = "checkbox"
-  check.checked = false
+  check.addEventListener('change', () => {
+    task.done = check.checked
+    console.log(task)
+  })
   li.append(check)
 
   list?.append(li)
