@@ -1,5 +1,5 @@
 export type Task = {
     "title": string,
-    "date": Date,
+    "date": string,
     "done": boolean
   }

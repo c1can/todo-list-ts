@@ -13,7 +13,7 @@ function HandleForm (e: Event)  {
   //creamos un objeto con mi input y creamos una fecha
   const myTask = {
     "title": input.value,
-    "date": new Date(),
+    "date": new Date().toLocaleDateString(),
     "done": false
   }
 
@@ -33,12 +33,12 @@ function Listwork(task: Task) {
 
   //work
   const work = document.createElement('P')
-  work.textContent = title
+  work.textContent = `Tarea: ${title}`
   li.append(work)
 
   //date
   const wdata = document.createElement('P')
-  wdata.textContent = date.toString()
+  wdata.textContent = `Fecha De Creacion: ${date}`;
   li.append(wdata)
 
   //done
